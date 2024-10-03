@@ -1925,12 +1925,13 @@ namespace audioutil
 //     return 0;
 // }
 
-int main(int argc, const char *argv[])
+extern "C"
+void export_audio(const char* inputPath, const char* outputPath)
 {
     using namespace audioutil;
     auto& audio_util = CAudioUtil::GetInstance();
 
-    audio_util.m_inputPath = "/Users/arthur/Code/Drafts/mmonsters/target/rom/data";
-    audio_util.m_outputPath = "/Users/arthur/Code/Drafts/ppmdu_2/SOUND";
+    audio_util.m_inputPath = inputPath;
+    audio_util.m_outputPath = outputPath;
     audio_util.ExportPMD2Audio();
 }

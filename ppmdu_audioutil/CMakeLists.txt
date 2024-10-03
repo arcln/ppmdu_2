@@ -1,7 +1,7 @@
 ###########################################################
 # Header
 ###########################################################
-list(APPEND audioutil_HEADER 
+list(APPEND audioutil_HEADER
     "../ppmdu_2/include/ppmdu/pmd2/game_stats.hpp"
     "../ppmdu_2/include/ppmdu/pmd2/pmd2.hpp"
     "../ppmdu_2/include/ppmdu/pmd2/pmd2_asm.hpp"
@@ -73,7 +73,7 @@ list(APPEND audioutil_HEADER
 ###########################################################
 # SRC
 ###########################################################
-list(APPEND audioutil_SRC 
+list(APPEND audioutil_SRC
     "../ppmdu_2/src/ppmdu/pmd2/pmd2.cpp"
     "../ppmdu_2/src/ppmdu/pmd2/pmd2_asm.cpp"
     "../ppmdu_2/src/ppmdu/pmd2/pmd2_configloader.cpp"
@@ -127,14 +127,14 @@ list(APPEND audioutil_SRC
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
-add_executable(audioutil ${audioutil_SRC} "src/audioutil.cpp" ${audioutil_HEADER} "src/audioutil.hpp" )
+add_library(audioutil STATIC ${audioutil_SRC} "src/audioutil.cpp" ${audioutil_HEADER} "src/audioutil.hpp" )
 set(audioutil_VERSION 0.38.0)
 
 add_compile_definitions(USE_PPMDU_CONTENT_TYPE_ANALYSER)
 add_compile_definitions(AUDIOUTIL_VER="${audioutil_VERSION}")
 add_compile_definitions(_REMOVE_FPOS_SEEKPOS)
 
-include_directories(audioutil 
+include_directories(audioutil
     "../ppmdu_2/include"
     "../${ppmdu_2_DEPS_DIRNAME}/whereami/src"
     "../${ppmdu_2_DEPS_DIRNAME}/jdksmidi/include"
@@ -146,21 +146,21 @@ find_package(Poco REQUIRED Util)
 
 #include_directories("../${ppmdu_2_DEPS_DIRNAME}/jdksmidi/include")
 #target_link_libraries(audioutil ppmdu jdksmidi whereami pugixml Poco::Foundation Poco::Util)
-target_link_libraries(audioutil 
-    whereami 
-    jdksmidi 
-    pugixml 
-    Poco::Foundation 
+target_link_libraries(audioutil
+    whereami
+    jdksmidi
+    pugixml
+    Poco::Foundation
     Poco::Util
 )
 
 
 file(
-    COPY 
+    COPY
         "../ppmdu_2/resources/pmd2_to_gm.xml"
         "../ppmdu_2/resources/pmd2data.xml"
         "../ppmdu_2/resources/pmd2eos_cvinfo.xml"
         "../ppmdu_2/readmes/ppmd_audioutil.txt"
-    DESTINATION 
+    DESTINATION
         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )

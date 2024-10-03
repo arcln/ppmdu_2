@@ -35,3 +35,5 @@
 .vs/
 bin/
 out/
+
+ppmdu_sys/target/
