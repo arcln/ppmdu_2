@@ -79,36 +79,36 @@ namespace audioutil
     */
     const vector<argumentparsing_t> CAudioUtil::Arguments_List =
     {{
-        //Input Path argument
-        { 
-            0,      //first arg
-            true,  //false == mandatory
-            true,   //guaranteed to appear in order
-            "input path", 
-            "Path to the file/directory to export, or the directory to assemble.",
-#ifdef WIN32
-            "\"c:/pmd_romdata/data.bin\"",
-#elif __linux__
-            "\"/pmd_romdata/data.bin\"",
-#endif
-            std::bind( &CAudioUtil::ParseInputPath,       &GetInstance(), placeholders::_1 ),
-            std::bind( &CAudioUtil::ShouldParseInputPath, &GetInstance(), placeholders::_1, placeholders::_2, placeholders::_3 ),
-        },
-        //Output Path argument
-        { 
-            1,      //second arg
-            true,   //true == optional
-            true,   //guaranteed to appear in order
-            "output path", 
-            "Output path. The result of the operation will be placed, and named according to this path!",
-#ifdef WIN32
-            "\"c:/pmd_romdata/data\"",
-#elif __linux__
-            "\"/pmd_romdata/data\"",
-#endif
-            std::bind( &CAudioUtil::ParseOutputPath,       &GetInstance(), placeholders::_1 ),
-            std::bind( &CAudioUtil::ShouldParseOutputPath, &GetInstance(), placeholders::_1, placeholders::_2, placeholders::_3 ),
-        },
+//         //Input Path argument
+//         { 
+//             0,      //first arg
+//             true,  //false == mandatory
+//             true,   //guaranteed to appear in order
+//             "input path", 
+//             "Path to the file/directory to export, or the directory to assemble.",
+// #ifdef WIN32
+//             "\"c:/pmd_romdata/data.bin\"",
+// #elif __linux__
+//             "\"/pmd_romdata/data.bin\"",
+// #endif
+//             std::bind( &CAudioUtil::ParseInputPath,       &GetInstance(), placeholders::_1 ),
+//             std::bind( &CAudioUtil::ShouldParseInputPath, &GetInstance(), placeholders::_1, placeholders::_2, placeholders::_3 ),
+//         },
+//         //Output Path argument
+//         { 
+//             1,      //second arg
+//             true,   //true == optional
+//             true,   //guaranteed to appear in order
+//             "output path", 
+//             "Output path. The result of the operation will be placed, and named according to this path!",
+// #ifdef WIN32
+//             "\"c:/pmd_romdata/data\"",
+// #elif __linux__
+//             "\"/pmd_romdata/data\"",
+// #endif
+//             std::bind( &CAudioUtil::ParseOutputPath,       &GetInstance(), placeholders::_1 ),
+//             std::bind( &CAudioUtil::ShouldParseOutputPath, &GetInstance(), placeholders::_1, placeholders::_2, placeholders::_3 ),
+//         },
     }};
 
 
@@ -1909,18 +1909,28 @@ namespace audioutil
 //=================================================================================================
 
 //#TODO: Move the main function somewhere else !
-int main( int argc, const char * argv[] )
+// int main( int argc, const char * argv[] )
+// {
+//     using namespace audioutil;
+//     try
+//     {
+//         return CAudioUtil::GetInstance().Main(argc,argv);
+//     }
+//     catch( exception & e )
+//     {
+//         cout<< "<!>-ERROR:" <<e.what()<<"\n"
+//             << "If you get this particular error output, it means an exception got through, and the programmer should be notified!\n";
+//     }
+
+//     return 0;
+// }
+
+int main(int argc, const char *argv[])
 {
     using namespace audioutil;
-    try
-    {
-        return CAudioUtil::GetInstance().Main(argc,argv);
-    }
-    catch( exception & e )
-    {
-        cout<< "<!>-ERROR:" <<e.what()<<"\n"
-            << "If you get this particular error output, it means an exception got through, and the programmer should be notified!\n";
-    }
+    auto& audio_util = CAudioUtil::GetInstance();
 
-    return 0;
+    audio_util.m_inputPath = "/Users/arthur/Code/Drafts/mmonsters/target/rom/data";
+    audio_util.m_outputPath = "/Users/arthur/Code/Drafts/ppmdu_2/SOUND";
+    audio_util.ExportPMD2Audio();
 }

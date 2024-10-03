@@ -38,7 +38,6 @@ namespace audioutil
         //Main method
         int Main(int argc, const char * argv[]);
 
-    private:
         CAudioUtil();
 
         //Parse Arguments

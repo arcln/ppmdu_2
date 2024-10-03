@@ -113,6 +113,27 @@
       }
     },
     {
+      "name": "arm64-macos-debug",
+      "displayName": "ARM64 macOS Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+          "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+        }
+      }
+    },
+    {
       "name": "x64-macos-release",
       "displayName": "x64 macOS Release",
       "inherits": "x64-linux-debug",
@@ -155,6 +176,10 @@
     {
       "name": "x64-macos-release",
       "configurePreset": "x64-macos-release"
+    },
+    {
+      "name": "arm64-macos-debug",
+      "configurePreset": "arm64-macos-debug"
     }
   ],
   "version": 3
